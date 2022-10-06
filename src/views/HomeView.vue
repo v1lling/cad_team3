@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import '../components/FileItem.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <v-list four-line>
+      <template v-for="x in [0,1,2]">
+        <FileItem/>
+      </template>
+    </v-list>
   </main>
 </template>
