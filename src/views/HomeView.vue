@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import '../components/FileItem.vue'
-</script>
-
 <template>
   <main>
     <v-list four-line>
@@ -11,3 +7,18 @@ import '../components/FileItem.vue'
     </v-list>
   </main>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+// Components
+import FileItem from '../components/FileItem.vue';
+
+export default defineComponent({
+  name: 'HomeView',
+
+  components: {
+    FileItem,
+  },
+});
+</script>
