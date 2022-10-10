@@ -10,27 +10,47 @@
     <h1>Upload File</h1>
     <v-file-input truncate-length="15" 
         chips
-        multiple
         show-size
         label="Choose File" 
-        @change="showUpload"></v-file-input>
+        @change="showUpload" ref="file"></v-file-input>
     <v-btn v-if="showButton" @click="upload">Upload</v-btn>
   </div>
 </template>
 
 <script>
+  import axios from "axios";
+
   export default {
     data() {
       return{
+        file: '',
+        date: Date.now(),
         showButton : false
       }
     },
     methods: {
       showUpload() {
         this.showButton = true
+        this.file = this.$refs.file.files[0];
       },
-      upload() {
-        console.log("upload")
+      async upload() {
+        console.log("upload");
+        let formData = new FormData();
+        formData.append('file', this.file);
+
+        await axios.post( '/single-file',     /////// INSERT API URL
+          formData,
+          {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+          }
+          ).then(function(){
+            console.log('SUCCESS!!');
+          })
+          .catch(function(){
+            console.log('FAILURE!!');
+          });
       }
     }
   }
