@@ -1,5 +1,5 @@
 <template>
-  <v-list-item class="mix"> File </v-list-item>
+  <v-list-item class="mix"> {{ item.title }} {{ item.file }} </v-list-item>
 </template>
 
 <script lang="ts">

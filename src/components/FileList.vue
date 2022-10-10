@@ -1,14 +1,21 @@
 <template>
-    asassd
-    {{ fileList }}
-</template>>
+    <div v-for='item in fileList' :key="item.title">
+        <FileItem :item="item"/>
+    </div>
+</template>
 
 <script>
 import axios from 'axios';
 
+// Components
+import FileItem from "../components/FileItem.vue";
+
 export default ({
 
     name: "FileList",
+    components: {
+        FileItem
+    },
     data() {
         return {
             fileList: null,
@@ -20,10 +27,9 @@ export default ({
                 this.fileList = response.data;
                 console.log(this.fileList);
             })
-            .catch(error => {
-                this.errorMessage = error.message;
-                console.error("There was an error!", error);
-            });
-    }
+            .catch((e) => {
+                console.log("There is an error " + e);
+    },
+    
 })
 </script>

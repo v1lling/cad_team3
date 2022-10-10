@@ -1,6 +1,6 @@
 <template>
   <main>
-    <FileList/>
+    <FileList />
   </main>
 </template>
 
@@ -16,7 +16,7 @@ export default defineComponent({
 
   components: {
     FileItem,
-    FileList
+    FileList,
   },
 });
 </script>
