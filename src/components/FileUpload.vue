@@ -37,8 +37,9 @@
         console.log("upload");
         let formData = new FormData();
         formData.append('file', this.file);
+        formData.append('remark', 'Testing from FE');
 
-        await axios.post( '/single-file',     /////// INSERT API URL
+        await axios.post('http://localhost:8000/file/upload/',     /////// INSERT API URL
           formData,
           {
             headers: {
