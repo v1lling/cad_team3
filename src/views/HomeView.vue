@@ -1,10 +1,6 @@
 <template>
   <main>
-    <v-list four-line>
-      <template v-for="x in [0, 1, 2]">
-        <FileItem />
-      </template>
-    </v-list>
+    <FileList/>
   </main>
 </template>
 
@@ -13,12 +9,14 @@ import { defineComponent } from "vue";
 
 // Components
 import FileItem from "../components/FileItem.vue";
+import FileList from "../components/FileList.vue";
 
 export default defineComponent({
   name: "HomeView",
 
   components: {
     FileItem,
+    FileList
   },
 });
 </script>
