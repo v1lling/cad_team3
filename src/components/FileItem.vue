@@ -1,5 +1,11 @@
 <template>
-  <v-list-item class="mix"> {{ item.title }} {{ item.file }} </v-list-item>
+  <v-container>
+    <v-card>
+    <v-card-title> {{ item.title }} {{ item.file }}</v-card-title>
+    <v-card-subtitle> {{ item.timestamp }}</v-card-subtitle>
+    </v-card>
+  </v-container>
+  
 </template>
 
 <script lang="ts">
