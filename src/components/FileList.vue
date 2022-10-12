@@ -1,6 +1,16 @@
+<style>
+.center {
+  padding-top: 2rem;
+  margin: auto;
+  width: 50%;
+}
+</style>
 <template>
-  <div v-for="item in fileList" :key="item.title">
-    <FileItem :item="item" />
+  <div class="center">
+    <v-text-field v-model="searchTerm" placeholder="Search" @input="searchFiles"/>
+    <div v-for="item in fileList" :key="item.title">
+      <FileItem :item="item" />
+    </div>
   </div>
 </template>
 
@@ -20,6 +30,7 @@ export default defineComponent({
   data() {
     return {
       fileList: null,
+      searchTerm: ""
     };
   },
   mounted() {
@@ -33,5 +44,17 @@ export default defineComponent({
         console.log("There is an error " + e);
       });
   },
-});
+  methods: {
+    searchFiles() {
+      axios
+      .get(`http://localhost:8000/files/?search=${this.searchTerm}`)
+      .then((response) => {
+        this.fileList = response.data;
+      })
+      .catch((e) => {
+        console.log("There is an error " + e);
+      });
+    }
+  }
+  });
 </script>
