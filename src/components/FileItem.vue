@@ -3,7 +3,8 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "FileItem",
   props: {
     item: {},
@@ -16,7 +17,7 @@ export default {
       console.log("getting details");
     },
   },
-};
+});
 </script>
 
 <style scoped></style>
