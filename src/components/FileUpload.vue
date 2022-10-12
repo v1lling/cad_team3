@@ -1,12 +1,12 @@
-<style>
-.center {
-  margin: auto;
-  width: 50%;
-}
-</style>
-
 <template>
+  <v-alert dense
+        text
+        type="success"
+        dismissible v-model="alert">
+          File successfully uploaded
+      </v-alert>
   <div id="input-field" class="center">
+    
     <h1>Upload File</h1>
     <v-text-field
       prepend-inner-icon="mdi-pencil"
@@ -25,6 +25,7 @@
       label="Choose File"
       @change="showUpload"
       ref="file"
+      :key="componentKey"
     ></v-file-input>
     <v-btn v-if="showButton" @click="upload">Upload</v-btn>
   </div>
@@ -39,6 +40,8 @@ export default {
       file: "",
       title: "",
       showButton: false,
+      alert: false,
+      componentKey: 0
     };
   },
   methods: {
@@ -48,7 +51,6 @@ export default {
       this.title = this.$refs.title.value;
     },
     async upload() {
-      console.log("upload");
       let formData = new FormData();
       formData.append("file", this.file);
       formData.append('filename', this.file.name);
@@ -63,13 +65,25 @@ export default {
             },
           }
         )
-        .then(function () {
-          console.log("SUCCESS!!");
+        .then((response) => {
+          this.alert= true;
+          this.title= ""; // reset title input
+          this.componentKey++; // reset v-file-input
+          window.setInterval(() => {
+            this.alert = false;
+          }, 3000);   
         })
-        .catch(function () {
-          console.log("FAILURE!!");
+        .catch(function (error) {
+          console.log(error);
         });
     },
   },
 };
 </script>
+
+<style>
+.center {
+  margin: auto;
+  width: 50%;
+}
+</style>

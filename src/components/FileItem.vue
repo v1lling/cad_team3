@@ -6,7 +6,7 @@
         {{ item.title }}       
       </v-card-title>
       <v-card-subtitle> {{ item.filename }}</v-card-subtitle>
-      <v-card-text> {{ item.timestamp }}</v-card-text>
+      <v-card-text> {{ getDateFormat(item.timestamp)}}</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat icon color="blue" class="ma-2" @click="downloadFile">
@@ -24,6 +24,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import FileDownload  from 'js-file-download';
+import moment from 'moment'
 
 export default defineComponent({
   name: "FileItem",
@@ -46,9 +47,14 @@ export default defineComponent({
         .catch((e) => {
           console.log("There is an error " + e);
         });
+    },
+    getDateFormat(value) {
+      return moment(String(value)).format('DD.MM.YYYY hh:mm') + 'Uhr';
     }
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
