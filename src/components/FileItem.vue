@@ -3,11 +3,16 @@
     <v-card>
       <v-card-title> 
         <v-icon>mdi-file</v-icon> 
-        {{ item.title }}       
+        {{ item?.title }}       
       </v-card-title>
-      <v-card-subtitle> {{ item.filename }}</v-card-subtitle>
-      <v-card-text> {{ getDateFormat(item.timestamp)}}</v-card-text>
+      <v-card-subtitle> {{ item?.filename }}</v-card-subtitle>
+      <v-card-text> {{ getDateFormat(item?.timestamp)}}</v-card-text>
       <v-card-actions>
+        <v-img
+          max-height="100"
+          max-width="100"
+          :src="item?.file"
+        ></v-img>
         <v-spacer></v-spacer>
         <v-btn flat icon color="blue" class="ma-2" @click="downloadFile">
           <v-icon right dark>
@@ -15,6 +20,7 @@
           </v-icon>
         </v-btn>
       </v-card-actions>
+      
     </v-card>
   </v-container>
   
@@ -29,7 +35,7 @@ import moment from 'moment'
 export default defineComponent({
   name: "FileItem",
   props: {
-    item: {},
+    item: Object,
   },
   data() {
     return {};
@@ -40,15 +46,15 @@ export default defineComponent({
     },
     downloadFile() {
       axios
-        .get(this.item.file, { responseType: 'arraybuffer' })
+        .get(this.item?.file, { responseType: 'arraybuffer' })
         .then((response) => {
-          FileDownload(response.data, this.item.filename);
+          FileDownload(response.data, this.item?.filename);
         })
         .catch((e) => {
           console.log("There is an error " + e);
         });
     },
-    getDateFormat(value) {
+    getDateFormat(value: String) {
       return moment(String(value)).format('DD.MM.YYYY hh:mm') + 'Uhr';
     }
   },
