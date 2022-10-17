@@ -35,7 +35,7 @@ export default defineComponent({
   },
   mounted() {
     axios
-      .get("http://localhost:8000/files/")
+      .get(`${import.meta.env.VITE_BACKEND_HOST}/files/`)
       .then((response) => {
         this.fileList = response.data;
         console.log(this.fileList);
@@ -47,7 +47,7 @@ export default defineComponent({
   methods: {
     searchFiles() {
       axios
-      .get(`http://localhost:8000/files/?search=${this.searchTerm}`)
+      .get(`${import.meta.env.VITE_BACKEND_HOST}/files/?search=${this.searchTerm}`)
       .then((response) => {
         this.fileList = response.data;
       })

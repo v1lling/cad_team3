@@ -57,7 +57,7 @@ export default {
       formData.append("title", this.title);
       await axios
         .post(
-          "http://localhost:8000/files/upload/", /////// INSERT API URL
+          `${import.meta.env.VITE_BACKEND_HOST}/files/upload`,
           formData,
           {
             headers: {
