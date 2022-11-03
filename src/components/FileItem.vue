@@ -45,14 +45,8 @@ export default defineComponent({
       console.log("getting details");
     },
     downloadFile() {
-      axios
-        .get(this.item?.file, { responseType: 'arraybuffer' })
-        .then((response) => {
-          FileDownload(response.data, this.item?.filename);
-        })
-        .catch((e) => {
-          console.log("There is an error " + e);
-        });
+      let url = this.item!.file;
+      window.open(url, '_blank');
     },
     getDateFormat(value: String) {
       return moment(String(value)).format('DD.MM.YYYY hh:mm') + 'Uhr';
